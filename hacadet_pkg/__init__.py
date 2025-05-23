@@ -18,9 +18,4 @@ from .file_utils import save_frame
 from .sound_manager import SoundManager
 from .video_utils import get_capture, resize_frame
 
-print("\nProject HaCaDet: No more low hanging cables!!!"
-      "\nDeveloper: Shaheem Backer"
-      "\nSupervision: Armin Dietrich"
-      "\nDepartment: TU-431"
-      "\nPlant: BMW Regensburg"
-      "\nCompany: BMW Group")
+print("\nProject HaCaDet: No more low hanging cables!!!")
