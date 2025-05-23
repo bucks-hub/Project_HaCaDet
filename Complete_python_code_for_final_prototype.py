@@ -5,21 +5,21 @@ import pygame
 import keyboard
 
 pygame.mixer.init()
-highalert = pygame.mixer.Sound('C:/Users/qxz60kx/Desktop/projects/HaCaDet/HaCaDet/alarm/alarm3.mp3')
-mediumalert = pygame.mixer.Sound('C:/Users/qxz60kx/Desktop/projects/HaCaDet/HaCaDet/alarm/alarm4.mp3')
+highalert = pygame.mixer.Sound('Path to high alert alarm file')
+mediumalert = pygame.mixer.Sound('Path to medium alert alarm file')
 
 # Load the YOLOv8 model
-bmw_model = YOLO('C:/Users/qxz60kx/Desktop/projects/HaCaDet/HaCaDet/weights/d_train10.pt')
-human_model = YOLO('C:/Users/qxz60kx/Desktop/projects/HaCaDet/HaCaDet/weights/yolov8n.pt')
+bmw_model = YOLO('Path to the weight file trained to detect skids and cables')
+human_model = YOLO('Path to COCO trained yolov8 weight file')
 
 # Path to the axis camera link
-camera_url = 'https://root:Axisbacker@10.246.81.121/axis-cgi/media.cgi'
+camera_url = 'Link to access the network camera'
 capture = cv.VideoCapture(camera_url)   # Create a VideoCapture object
 
 # Frame skipping parameter (e.g., process every 30th frame)
 frame_skip = 12
 frame_count = 0
-save_path = "C:/ultralytics/frame_with_issues"
+save_path = "Path to the folder where the frames with low hanging cable detections need to be saved"
 os.makedirs(save_path, exist_ok=True)
 os.chdir(save_path)
 
