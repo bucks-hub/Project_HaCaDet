@@ -1,14 +1,9 @@
-import cv2 as cv
-from ultralytics import YOLO
-from config import *
-from video_utils import get_capture, resize_frame
-from detectors import detect_humans, detect_objects, check_alert
-from sound_manager import SoundManager
-from file_utils import save_frame
+from hacadet import *
+
+
 def main():
     # Initialize components
     bmw_model = YOLO(BMW_MODEL_PATH)
-    human_model = YOLO(HUMAN_MODEL_PATH)
     sound = SoundManager()
     capture = get_capture()
     frame_count = 0
@@ -24,11 +19,10 @@ def main():
                     capture = get_capture()
                     continue
 
-                #frame = resize_frame(frame)
+                frame = resize_frame(frame)
 
                 if frame_count % FRAME_SKIP == 0:
                     # Process frame
-                    frame = detect_humans(frame, human_model)
                     cables, skids, frame = detect_objects(frame, bmw_model)
                     alert = check_alert(cables, skids, THRESHOLD)
 
@@ -72,7 +66,8 @@ def main():
     # Cleanup
     capture.release()
     cv.destroyAllWindows()
-    print("Program terminated successfully")
+    print("HaCaDet terminated successfully")
+
 
 if __name__ == "__main__":
     main()
