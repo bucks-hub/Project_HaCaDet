@@ -1,0 +1,1 @@
+This version converted the entire script into a single package by introducing __init__.py. THis brought a simplified structure for the script and it made the import statements of each module into a single line. ALl functions and variable are imported from the package "hacadet".
