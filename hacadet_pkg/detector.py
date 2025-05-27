@@ -1,8 +1,8 @@
-from hacadet import cv
+from hacadet_pkg import cv
 
 
 def detect_objects(frame, model):
-    results = model.predict(frame, conf=0.3)
+    results = model.predict(frame, conf=0.5, imgsz=1280)
     cables = []
     skids = []
 
@@ -20,15 +20,17 @@ def detect_objects(frame, model):
     return cables, skids, frame
 
 
-def check_alert(cables, skids, threshold):
+def check_alert(cables, skids, threshold, width):
     if not cables:
         return None
-
-    lowest_cable = max(c[3] for c in cables)
-    for skid in skids:
-        skid_top = skid[1]
-        if lowest_cable >= skid_top:
-            return 'high'
-        elif (skid_top - lowest_cable) <= threshold:
-            return 'medium'
-    return None
+    else:
+        lowest_cable = max(c[3] for c in cables)
+        for c in cables:
+            x_cen = (c[0]+c[2])/2
+            for skid in skids:
+                skid_top = skid[1]
+                if lowest_cable >= skid_top and abs(x_cen - (width/2)) < 200:
+                    return 'high'
+                elif (skid_top - lowest_cable) <= threshold and abs(x_cen - (width/2)) < 200:
+                    return 'medium'
+                return None
