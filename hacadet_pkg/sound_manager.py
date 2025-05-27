@@ -1,4 +1,4 @@
-from hacadet import pg, SOUND_PATHS
+from hacadet_pkg import pg, SOUND_PATHS
 
 
 class SoundManager:
