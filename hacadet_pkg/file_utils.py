@@ -1,4 +1,4 @@
-from hacadet import cv, os, SAVE_PATH
+from hacadet_pkg import cv, os, SAVE_PATH
 
 
 def save_frame(frame, frame_count):
