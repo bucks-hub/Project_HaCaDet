@@ -1,4 +1,4 @@
-from hacadet import cv, CAMERA_URL
+from hacadet_pkg import cv, CAMERA_URL
 
 
 def get_capture():
