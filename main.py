@@ -1,4 +1,4 @@
-from hacadet import *
+from hacadet_pkg import *
 
 
 def main():
