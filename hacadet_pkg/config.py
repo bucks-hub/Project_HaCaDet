@@ -1,4 +1,4 @@
-from hacadet import os
+from hacadet_pkg import os
 # Model paths
 BMW_MODEL_PATH = 'Path to detection weight file'
 
