@@ -1,6 +1,6 @@
 New Updates:
 		
-1) Few underlying bugs that slowed the script were found and cleared.
-2) The control keys were minimized from 4 to 2. Previously, we had s, p, c and t for stop(mute), pause, continue and terminate respectively. In this version, muting the alarm , pausing the detection and resuming the detection are controlled by a single key 'p'. Termination is done by pressing 'Esc' key.
-3) The low hanging cable detection performed at the immediate emergenace of the cable in the frame is skipped. Instead the alarm is only turned ON when the low hanging cable crosses a particular pixel in the x-direction. This eases the user to understand the location of the cable in the frame for accurately. Also, errors occured due to wrong detection of the black edges of the skid as cables are rectified.
-
+1) Script upgraded to enable multiple processses running in parallel. Each process can access different cameras.
+2) This feature is beneficial when we deploy hacadent on the production line and cameras are place on both sides of the band. This helps to detect all the cables from both sides of the automobile.
+3) All these processes are run in realtime with a single processor(GPU or CPU) but on different cores.
+4) The window in which a low hanging cable is detected will be forces to appear infront of the screen and then can be controlled using the control keys.
