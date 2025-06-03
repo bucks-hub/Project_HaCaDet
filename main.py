@@ -14,28 +14,30 @@ def main():
         if not paused:
             while capture.isOpened():
                 success, frame = capture.read()
+                # print(frame.shape)
                 if not success:
                     print("Reconnecting...")
                     capture = get_capture()
                     continue
                 width = frame.shape[1]
-                frame = resize_frame(frame)
+                # frame = resize_frame(frame)
 
                 if frame_count % FRAME_SKIP == 0:
                     # Process frame
                     cables, skids, frame = detect_objects(frame, bmw_model)
                     alert = check_alert(cables, skids, THRESHOLD, width)
                     cv.namedWindow("HaCaDet", cv.WINDOW_NORMAL)
-                    cv.setWindowProperty("HaCaDet", cv.WND_PROP_FULLSCREEN, cv.WINDOW_FULLSCREEN)
+                    # cv.setWindowProperty("HaCaDet", cv.WND_PROP_FULLSCREEN, cv.WINDOW_FULLSCREEN)
                     cv.imshow("HaCaDet", frame)
                     # Handle alerts
                     if alert:
+                        capture.release()
                         save_frame(frame, frame_count)
                         print(f"{alert.capitalize()} Alert!!!")
                         sound.play(alert)
                         print("Press 'p' to mute")
                         while True:
-                            key = cv.waitKey(0)
+                            key = cv.waitKey(5000)
                             if key == ord('p'):
                                 sound.stop(alert)
                                 cv.imshow("HaCaDet-Fix the issue!!!", frame)
@@ -46,7 +48,12 @@ def main():
                                     break
                                 elif key == ord('p'):
                                     cv.destroyWindow("HaCaDet-Fix the issue!!!")
+                                    capture = get_capture()
                                     break
+                            else:
+                                sound.stop(alert)
+                                print("Time Out")
+                                break
                         if terminated:
                             break
                     else:
@@ -54,6 +61,7 @@ def main():
                         key = cv.waitKey(20)
                         if key == ord('p'):
                             paused = True
+                            capture.release()
                             break
                         elif key == 27:
                             terminated = True
@@ -67,6 +75,7 @@ def main():
                 while True:
                     key = cv.waitKey(0)
                     if key == ord('p'):
+                        capture = get_capture()
                         paused = False
                         break
                     elif key == 27:
