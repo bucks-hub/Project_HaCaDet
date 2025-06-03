@@ -3,8 +3,8 @@ from hacadet_pkg import os
 BMW_MODEL_PATH = 'Path to detection weight file'
 
 # Camera settings
-CAMERA_URL = 'Link to access the Network camera'
-FRAME_SKIP = 24
+CAMERA_URL = ['Link to access the Network camera 1', 'Link to access the Network camera 2',...., 'Link to access the Network camera n']
+FRAME_SKIP = 18
 THRESHOLD = 10  # pixels
 
 # File settings
